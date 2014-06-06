@@ -69,13 +69,14 @@ namespace Prim_Alghorithm {
             // 1) bouw een tabel op met [aantal knopen] rijen en [aantal knopen] kolommen, 
             // met daarin opgenomen de onderlinge afstanden 
             DataTable table = new DataTable("PrimTable");
+            table.Columns.Add(new DataColumn("="));
             for (int i = 0; i < knopen.Count; i++) {
                 table.Columns.Add(new DataColumn(knopen[i].Identifier));
             }
 
             for (int i = 1; i <= knopen.Count; i++) {
                 DataRow dr = table.NewRow();
-
+                dr["="] = "H" + i;
                 for (int e = 1; e <= knopen.Count; e++) {
                     if (kanten.Any(k => k.KnoopA.Identifier == "H" + e && k.KnoopB.Identifier == "H" + i)) {
                         dr["H" + e] = kanten.SingleOrDefault(k => k.KnoopA.Identifier == "H" + e && k.KnoopB.Identifier == "H" + i).Lengte;
@@ -93,6 +94,11 @@ namespace Prim_Alghorithm {
             var SBind = new BindingSource();
             SBind.DataSource = table;
             dataGridView1.DataSource = SBind;
+            
+            //Layout improvements
+            foreach (DataGridViewColumn column in dataGridView1.Columns) {
+                column.Width = 30;
+            }
 
             // 2a) selecteer een willekeurige knoop en verwijder de betreffende rij 
             Random rnd = new Random();
