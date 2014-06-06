@@ -89,14 +89,14 @@ namespace Prim_Alghorithm {
                 }
                 table.Rows.Add(dr);
             }
+            //Show table for funsiess
             var SBind = new BindingSource();
             SBind.DataSource = table;
             dataGridView1.DataSource = SBind;
-            dataGridView1.Refresh();
 
             // 2a) selecteer een willekeurige knoop en verwijder de betreffende rij 
             Random rnd = new Random();
-            int randomSelecteerdeKnoop = rnd.Next(1, knopen.Count + 1);
+            int randomSelecteerdeKnoop = rnd.Next(0, knopen.Count);
 
             var geselecteerdeKnopen = new List<Knoop>();
             geselecteerdeKnopen.Add(knopen[randomSelecteerdeKnoop]);
